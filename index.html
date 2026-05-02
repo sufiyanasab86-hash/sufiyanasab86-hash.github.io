@@ -1,14 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Office App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { font-family: Arial; margin:0; background:#f4f4f4; text-align:center; }
-    header { background:#0078d4; color:white; padding:15px; font-size:22px; }
-    .box { margin:20px; padding:20px; background:white; border-radius:10px; }
-    button { padding:10px; margin:10px; background:#0078d4; color:white; border:none; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohammad Sufiyan Office App</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0078d4">
+
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  background: #f4f4f4;
+  text-align: center;
+}
+
+header {
+  background: #0078d4;
+  color: white;
+  padding: 15px;
+  font-size: 22px;
+}
+
+.box {
+  background: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+}
+
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  border: none;
+  background: #0078d4;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+button:hover {
+  background: #005fa3;
+}
+
+.install-btn {
+  background: green;
+}
+</style>
 </head>
 
 <body>
@@ -16,17 +57,44 @@
 <header>My Office App</header>
 
 <div class="box">
-  <h2>Welcome</h2>
-  <p>Your website is live 🚀</p>
+  <h2>👋 Hello</h2>
+  <h3>Welcome to Mohammad Sufiyan Office Website</h3>
+
+  <p>Your smart office app is ready 🚀</p>
+
   <a href="https://www.office.com/launch/word" target="_blank">
-  <button>Word</button>
-</a>
+    <button>Word</button>
+  </a>
 
-<a href="https://www.office.com/launch/excel" target="_blank">
-  <button>Excel</button>
-</a>
+  <a href="https://www.office.com/launch/excel" target="_blank">
+    <button>Excel</button>
+  </a>
 
-<a href="https://www.office.com/launch/powerpoint" target="_blank">
-  <button>PowerPoint</button>
-</a>
-  
+  <a href="https://www.office.com/launch/powerpoint" target="_blank">
+    <button>PowerPoint</button>
+  </a>
+
+  <br><br>
+
+  <button class="install-btn" onclick="installApp()">📲 Install App</button>
+</div>
+
+<script>
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+  } else {
+    alert("Install option browser menu me milega (Add to Home Screen)");
+  }
+}
+</script>
+
+</body>
+</html>
