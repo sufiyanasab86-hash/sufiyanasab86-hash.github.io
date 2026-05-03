@@ -5,94 +5,112 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mohammad Sufiyan Office App</title>
 
-<!-- PWA -->
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0078d4">
 
 <style>
 body {
+  margin:0;
   font-family: Arial;
-  margin: 0;
-  background: #f4f4f4;
-  text-align: center;
+  text-align:center;
+  background:#f4f4f4;
 }
 
-header {
-  background: #0078d4;
-  color: white;
-  padding: 15px;
-  font-size: 22px;
+.screen {
+  display:none;
+  padding:20px;
 }
 
-.box {
-  background: white;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+.active {
+  display:block;
 }
 
 button {
-  padding: 12px 20px;
-  margin: 10px;
-  border: none;
-  background: #0078d4;
-  color: white;
-  border-radius: 6px;
-  font-size: 16px;
+  padding:12px 20px;
+  margin:10px;
+  background:#0078d4;
+  color:white;
+  border:none;
+  border-radius:6px;
 }
 
-button:hover {
-  background: #005fa3;
+input, select {
+  padding:10px;
+  margin:8px;
+  width:80%;
 }
 
-.install-btn {
-  background: green;
+.avatar {
+  font-size:60px;
+  animation: float 2s infinite;
+}
+
+@keyframes float {
+  0% {transform:translateY(0)}
+  50% {transform:translateY(-10px)}
+  100% {transform:translateY(0)}
 }
 </style>
 </head>
 
 <body>
 
-<header>My Office App</header>
-
-<div class="box">
-  <h2>👋 Hello</h2>
+<!-- SCREEN 1 -->
+<div id="screen1" class="screen active">
+  <div class="avatar">👨‍💼</div>
+  <h2>Hello 👋</h2>
   <h3>Welcome to Mohammad Sufiyan Office Website</h3>
+  <button onclick="next(2)">Next ➡️</button>
+</div>
 
-  <p>Your smart office app is ready 🚀</p>
+<!-- SCREEN 2 -->
+<div id="screen2" class="screen">
+  <h2>How this app works</h2>
+  <p>Yaha aap kaam dhund sakte ho ya kaam de sakte ho</p>
+  <p>Construction & Cully work available</p>
+  <button onclick="next(3)">Next ➡️</button>
+</div>
 
-  <a href="https://www.office.com/launch/word" target="_blank">
-    <button>Word</button>
-  </a>
+<!-- SCREEN 3 -->
+<div id="screen3" class="screen">
+  <h2>Login / Create Account</h2>
+  <button onclick="next(4)">Create Account</button>
+</div>
 
-  <a href="https://www.office.com/launch/excel" target="_blank">
-    <button>Excel</button>
-  </a>
+<!-- SCREEN 4 -->
+<div id="screen4" class="screen">
+  <h2>Create Account</h2>
 
-  <a href="https://www.office.com/launch/powerpoint" target="_blank">
-    <button>PowerPoint</button>
-  </a>
+  <input placeholder="Name"><br>
+  <input placeholder="Mobile Number"><br>
 
-  <br><br>
+  <select>
+    <option>Work Category</option>
+    <option>Construction Work</option>
+    <option>Cully Work</option>
+  </select><br>
 
-  <button class="install-btn" onclick="installApp()">📲 Install App</button>
+  <input placeholder="Enter Work Skills"><br>
+
+  <button onclick="alert('OTP Sent!')">Send OTP</button><br>
+  <input placeholder="Enter OTP"><br>
+
+  <button onclick="next(5)">Verify</button>
+</div>
+
+<!-- SCREEN 5 -->
+<div id="screen5" class="screen">
+  <h2>Post Work</h2>
+  <p>Type your work requirement</p>
+
+  <input placeholder="What work you need?"><br>
+
+  <button onclick="alert('Work Posted!')">Submit</button>
 </div>
 
 <script>
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-});
-
-function installApp() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-  } else {
-    alert("Install option browser menu me milega (Add to Home Screen)");
-  }
+function next(num){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen'+num).classList.add('active');
 }
 </script>
 
