@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+to<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -75,7 +75,20 @@ input, select {
   <h2>Login / Create Account</h2>
   <button onclick="next(4)">Create Account</button>
 </div>
+<div id="skillsPage" style="display:none; text-align:center;">
+  <h2>Select Your Skills</h2>
 
+  <button onclick="selectSkill('Construction')">🏗 Construction Work</button>
+  <br><br>
+  <button onclick="selectSkill('Cully')">👷 Cully Work</button>
+
+  <div id="workInput" style="margin-top:20px; display:none;">
+    <h3>Kaam detail likho</h3>
+    <input type="text" id="workDetail" placeholder="Kaunsa kaam karwana hai..." style="padding:10px; width:80%;">
+    <br><br>
+    <button onclick="submitWork()">Submit</button>
+  </div>
+</div>
 <!-- SCREEN 4 -->
 <div id="screen4" class="screen">
   <h2>Create Account</h2>
@@ -106,13 +119,83 @@ input, select {
 
   <button onclick="alert('Work Posted!')">Submit</button>
 </div>
-
+<button onclick="showSkillsPage()">Create Account</button>
 <script>
 function next(num){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen'+num).classList.add('active');
 }
 </script>
+<script>
+function showSkillsPage() {
+  document.body.innerHTML = document.getElementById('skillsPage').outerHTML;
+}
 
+function selectSkill(skill) {
+  alert("Selected: " + skill);
+  document.getElementById('workInput').style.display = 'block';
+}
+
+function submitWork() {
+  let work = document.getElementById('workDetail').value;
+  alert("Work Submitted: " + work);
+}
+</script><script><script>
+function showSkillsPage() {
+  document.body.innerHTML = document.getElementById('skillsPage').outerHTML;<script>
+function showSkillsPage() {
+  document.body.innerHTML = document.getElementById('skillsPage').outerHTML;
+}
+
+function selectSkill(skill) {
+  alert("Selected: " + skill);
+  document.getElementById('workInput').style.display = 'block';
+}
+
+function submitWork() {
+  let work = document.getElementById('workDetail').value;
+  alert("Work Submitted: " + work);
+}
+</script>
+}
+
+function selectSkill(skill) {
+  alert("Selected: " + skill);
+  document.getElementById('workInput').style.display = 'block';
+}
+
+function submitWork() {
+  let work = document.getElementById('workDetail').value;
+  alert("Work Submitted: " + work);
+}
+</script>
+function showSkillsPage() {
+  document.body.innerHTML = document.getElementById('skillsPage').outerHTML;
+}
+
+function selectSkill(skill) {
+  alert("Selected: " + skill);
+  document.getElementById('workInput').style.display = 'block';
+}
+
+function submitWork() {
+  let work = document.getElementById('workDetail').value;
+  alert("Work Submitted: " + work);
+}
+</script><script>
+function showSkillsPage() {
+  document.body.innerHTML = document.getElementById('skillsPage').outerHTML;
+}
+
+function selectSkill(skill) {
+  alert("Selected: " + skill);
+  document.getElementById('workInput').style.display = 'block';
+}
+
+function submitWork() {
+  let work = document.getElementById('workDetail').value;
+  alert("Work Submitted: " + work);
+}
+</script>
 </body>
 </html>
