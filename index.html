@@ -42,14 +42,142 @@ input, select {
 
 <body>
 
-<!-- 🔵 PAGE 1: WELCOME -->
-<div id="welcome" class="page active">
-  <h1>👋 Welcome</h1>
-  <h2>Welcome to MS Office Website</h2>
-  <button onclick="nextPage('skills')">Next ➡️</button>
+<!-- 🔵 PAGE 1:<div id="welcome" class="page active" style="
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0078d4,#00c6ff);
+color:white;
+text-align:center;
+">
+
+<!-- Girl Image -->
+<img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
+style="width:200px; animation:float 3s ease-in-out infinite;">
+
+<h1 style="margin-top:20px;">Hello 👋</h1>
+<h2>Welcome to MS Office Website</h2>
+
+<button onclick="startApp()" style="
+margin-top:20px;
+background:white;
+color:#0078d4;
+font-weight:bold;">
+Start ➡️
+</button>
+
 </div>
 
-<!-- 🔵 PAGE 2: SKILLS -->
+<style>
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+</style>
+
+<script>
+// 🔊 Voice Welcome
+window.onload = function() {
+  let msg = new SpeechSynthesisUtterance(
+    "Welcome to MS Office Website. Mein aap ka swagat karti hoon"
+  );
+
+  msg.lang = "hi-IN"; // Hindi voice
+  msg.rate = 1;
+  msg.pitch = 1;
+
+  speechSynthesis.speak(msg);
+};
+
+// Next Page
+function startApp() {
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("skills").style.display = "block";
+}
+</script> 
+
+<!-- 🔵 PAGE 2: SKILLS --><!-- 🔵 SKILLS PAGE -->
+<div id="skills" class="page active">
+
+  <h2 style="margin-bottom:20px;">Choose Your Skill</h2>
+
+  <div class="skill-box" onclick="selectSkill('Construction')">
+    🏗️
+    <h3>Construction Work</h3>
+    <p>Building, Repair, Labour Work</p>
+  </div>
+
+  <div class="skill-box" onclick="selectSkill('Cully')">
+    🧱
+    <h3>Cully Work</h3>
+    <p>Loading, Carry Work</p>
+  </div>
+
+</div>
+
+<style>
+.skill-box {
+  background: white;
+  margin: 15px;
+  padding: 20px;
+  border-radius: 15px;<!-- 🔵 SKILLS PAGE -->
+<div id="skills" class="page active">
+
+  <h2 style="margin-bottom:20px;">Choose Your Skill</h2>
+
+  <div class="skill-box" onclick="selectSkill('Construction')">
+    🏗️
+    <h3>Construction Work</h3>
+    <p>Building, Repair, Labour Work</p>
+  </div>
+
+  <div class="skill-box" onclick="selectSkill('Cully')">
+    🧱
+    <h3>Cully Work</h3>
+    <p>Loading, Carry Work</p>
+  </div>
+
+</div>
+
+<style>
+.skill-box {
+  background: white;
+  margin: 15px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.skill-box:hover {
+  transform: scale(1.05);
+  background: #0078d4;
+  color: white;
+}
+
+.skill-box h3 {
+  margin: 10px 0 5px;
+}
+</style>
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.skill-box:hover {
+  transform: scale(1.05);
+  background: #0078d4;
+  color: white;
+}
+
+.skill-box h3 {
+  margin: 10px 0 5px;
+}
+</style>
 <div id="skills" class="page">
   <h2>Select Your Skill</h2>
   <button onclick="selectSkill('Construction')">Construction Work</button>
