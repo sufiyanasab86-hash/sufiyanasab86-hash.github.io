@@ -1,45 +1,149 @@
- <", skill);
-  document.getElementById("skills").style.display = "none";
-  document.getElementById("account").classList.add("active");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MS Office Work App</title>
 
-  document.getElementById("skillInput").value = skill;
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  text-align: center;
+  background: #f4f4f4;
 }
 
-/* Role Forms */
-function showWorker() {
-  document.getElementById("workerForm").style.display = "block";
-  document.getElementById("providerForm").style.display = "none";
+.page { display: none; padding: 20px; }
+.active { display: block; }
+
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  background: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
 }
 
-function showProvider() {
-  document.getElementById("providerForm").style.display = "block";
-  document.getElementById("workerForm").style.display = "none";
+/* 3D Welcome */
+#welcome {
+  height: 100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:#0078d4;
+  color:white;
+}
+
+.avatar {
+  font-size: 80px;
+  animation: float 2s infinite alternate;
+}
+
+@keyframes float {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-20px); }
+}
+
+.skill {
+  background:white;
+  margin:10px;
+  padding:15px;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 1️⃣ Welcome Page -->
+<div id="welcome" class="page active">
+  <div class="avatar">👩</div>
+  <h1>Welcome to MS Office Website</h1>
+  <button onclick="nextPage('skills')">Next ➡</button>
+</div>
+
+<!-- 2️⃣ Skills Page -->
+<div id="skills" class="page">
+  <h2>Available Work</h2>
+
+  <div class="skill">👷 Construction Work</div>
+  <div class="skill">🧱 Cully Work</div>
+  <div class="skill">🔧 Helper Work</div>
+
+  <button onclick="nextPage('account')">Next ➡</button>
+</div>
+
+<!-- 3️⃣ Account Page -->
+<div id="account" class="page">
+  <h2>Create Account</h2>
+
+  <button onclick="showWorker()">I Want Work</button>
+  <button onclick="showProvider()">I Give Work</button>
+
+  <!-- Worker Form -->
+  <div id="workerForm" style="display:none;">
+    <h3>Worker Form</h3>
+    <input placeholder="Name"><br><br>
+    <input placeholder="Skill"><br><br>
+    <input placeholder="Mobile Number"><br><br>
+    <button onclick="submitWorker()">Submit</button>
+  </div>
+
+  <!-- Provider Form -->
+  <div id="providerForm" style="display:none;">
+    <h3>Work Provider Form</h3>
+    <input placeholder="Work Details"><br><br>
+    <input id="location" placeholder="Location"><br><br>
+    <button onclick="getLocation()">Get Location 📍</button><br><br>
+    <button onclick="submitProvider()">Submit</button>
+  </div>
+
+</div>
+
+<script>
+
+/* Page Navigation */
+function nextPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+/* Role Selection */
+function showWorker(){
+  document.getElementById("workerForm").style.display="block";
+  document.getElementById("providerForm").style.display="none";
+}
+
+function showProvider(){
+  document.getElementById("providerForm").style.display="block";
+  document.getElementById("workerForm").style.display="none";
 }
 
 /* Submit */
-function submitWorker() {
+function submitWorker(){
   alert("Worker Account Created ✅");
 }
 
-function submitProvider() {
+function submitProvider(){
   alert("Work Posted Successfully ✅");
 }
 
 /* Location */
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(pos) {
+function getLocation(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
       document.getElementById("location").value =
         pos.coords.latitude + ", " + pos.coords.longitude;
     });
   }
 }
 
-/* 🔊 Voice Welcome */
-window.onload = function() {
-  let msg = new SpeechSynthesisUtterance(
-    "Welcome to MS Office Website. Mein aap ka swagat karti hoon"
-  );
+/* Voice Welcome (Girl Voice) */
+window.onload = function(){
+  let msg = new SpeechSynthesisUtterance("Welcome to MS Office Website, Mein aap ka swagat karti hoon");
   msg.lang = "hi-IN";
   speechSynthesis.speak(msg);
 }
@@ -48,6 +152,3 @@ window.onload = function() {
 
 </body>
 </html>
-  
-
-  
