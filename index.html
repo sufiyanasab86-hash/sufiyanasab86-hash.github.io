@@ -3,98 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MS Office App</title>
-
-<link rel="manifest" href="manifest.json">
+<title>MS Office Work App</title>
 
 <style>
 body {
-  margin: 0;
   font-family: Arial;
-  background: black;
-  color: white;
+  margin: 0;
   text-align: center;
+  background: #f4f4f4;
 }
 
-/* 3D Welcome Screen */
-#welcomePage {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  perspective: 1000px;
-}
-
-.card {
-  width: 300px;
-  height: 200px;
-  background: linear-gradient(135deg, #0078d4, #00c6ff);
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform-style: preserve-3d;
-  animation: rotate3d 5s infinite linear;
-}
-
-@keyframes rotate3d {
-  0% { transform: rotateY(0deg); }
-  100% { transform: rotateY(360deg); }
-}
-
-.card h2 {
-  transform: translateZ(50px);
-}
-
-button {
-  margin-top: 20px;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
-  background: #0078d4;
-  color: white;
-  font-size: 16px;
-}
-
-/* बाकी pages */
 .page {
   display: none;
   padding: 20px;
-  background: #f4f4f4;
-  color: black;
-  min-height: 100vh;
 }
 
 .active {
   display: block;
+}
+
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  border: none;
+  background: #0078d4;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+input, select {
+  padding: 10px;
+  margin: 8px;
+  width: 80%;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 3D WELCOME -->
-<div id="welcomePage">
-  <div class="card">
-    <h2>👋 Welcome to<br>MS Office Website</h2>
-  </div>
-  <button onclick="nextPage()">Enter ➡️</button>
+<!-- 🔵 PAGE 1: WELCOME -->
+<div id="welcome" class="page active">
+  <h1>👋 Welcome</h1>
+  <h2>Welcome to MS Office Website</h2>
+  <button onclick="nextPage('skills')">Next ➡️</button>
 </div>
 
-<!-- MAIN PAGE -->
-<div id="mainPage" class="page">
-  <h2>👷 Work App</h2>
-  <p>Yaha aap kaam dhund sakte ho ya kaam de sakte ho</p>
+<!-- 🔵 PAGE 2: SKILLS -->
+<div id="skills" class="page">
+  <h2>Select Your Skill</h2>
+  <button onclick="selectSkill('Construction')">Construction Work</button>
+  <button onclick="selectSkill('Cully')">Cully Work</button>
+</div>
 
-  <button onclick="alert('Create Account Feature')">Create Account</button>
+<!-- 🔵 PAGE 3: CREATE ACCOUNT -->
+<div id="account" class="page">
+  <h2>Create Account</h2>
+
+  <p>Select Type:</p>
+  <button onclick="showWorker()">I want Work</button>
+  <button onclick="showProvider()">I want Workers</button>
+
+  <!-- Worker Form -->
+  <div id="workerForm" style="display:none;">
+    <h3>Worker Form</h3>
+    <input type="text" placeholder="Your Name"><br>
+    <input type="text" id="skillInput" placeholder="Skill"><br>
+    <input type="text" placeholder="Work Type"><br>
+    <input type="number" placeholder="Mobile Number"><br>
+    <button onclick="submitWorker()">Submit</button>
+  </div>
+
+  <!-- Provider Form -->
+  <div id="providerForm" style="display:none;">
+    <h3>Work Provider Form</h3>
+    <input type="text" placeholder="Work Type"><br>
+    <input type="text" id="location" placeholder="Location"><br>
+    <button onclick="getLocation()">Get Location 📍</button><br>
+    <button onclick="submitProvider()">Submit</button>
+  </div>
+
 </div>
 
 <script>
-function nextPage() {
-  document.getElementById("welcomePage").style.display = "none";
-  document.getElementById("mainPage").classList.add("active");
+
+// Page Switch
+function nextPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
 }
+
+// Skill Select
+function selectSkill(skill) {
+  document.getElementById("skillInput").value = skill;
+  nextPage('account');
+}
+
+// Show Worker Form
+function showWorker() {
+  document.getElementById("workerForm").style.display = "block";
+  document.getElementById("providerForm").style.display = "none";
+}
+
+// Show Provider Form
+function showProvider() {
+  document.getElementById("providerForm").style.display = "block";
+  document.getElementById("workerForm").style.display = "none";
+}
+
+// Submit Worker
+function submitWorker() {
+  alert("Worker Account Created ✅");
+}
+
+// Submit Provider
+function submitProvider() {
+  alert("Work Posted Successfully ✅");
+}
+
+// Location Feature
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      document.getElementById("location").value =
+        pos.coords.latitude + ", " + pos.coords.longitude;
+    });
+  } else {
+    alert("Location not supported");
+  }
+}
+
 </script>
 
 </body>
