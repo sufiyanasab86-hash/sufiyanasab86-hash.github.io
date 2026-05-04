@@ -3,158 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sufiyan Work App</title>
+<title>MS Office App</title>
 
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0078d4">
 
 <style>
 body {
-  font-family: Arial;
   margin: 0;
+  font-family: Arial;
+  background: black;
+  color: white;
   text-align: center;
-  background: #f4f4f4;
 }
 
+/* 3D Welcome Screen */
+#welcomePage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  perspective: 1000px;
+}
+
+.card {
+  width: 300px;
+  height: 200px;
+  background: linear-gradient(135deg, #0078d4, #00c6ff);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  animation: rotate3d 5s infinite linear;
+}
+
+@keyframes rotate3d {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+.card h2 {
+  transform: translateZ(50px);
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #0078d4;
+  color: white;
+  font-size: 16px;
+}
+
+/* बाकी pages */
 .page {
   display: none;
   padding: 20px;
+  background: #f4f4f4;
+  color: black;
+  min-height: 100vh;
 }
 
 .active {
   display: block;
-}
-
-button {
-  padding: 12px 20px;
-  margin: 10px;
-  border: none;
-  background: #0078d4;
-  color: white;
-  border-radius: 6px;
-  font-size: 16px;
-}
-
-.install-btn { background: green; }
-
-input, select {
-  padding: 10px;
-  margin: 5px;
-  width: 80%;
 }
 </style>
 </head>
 
 <body>
 
-<!-- INSTALL -->
-<div id="installPage" class="page active">
-  <h2>Install App 📲</h2>
-  <button class="install-btn" onclick="installApp()">Install</button>
+<!-- 3D WELCOME -->
+<div id="welcomePage">
+  <div class="card">
+    <h2>👋 Welcome to<br>MS Office Website</h2>
+  </div>
+  <button onclick="nextPage()">Enter ➡️</button>
 </div>
 
-<!-- WELCOME -->
-<div id="welcomePage" class="page">
-  <h2>👋 Hello</h2>
-  <h3>Welcome to Mohammad Sufiyan MS Office Website</h3>
-  <button onclick="nextPage('registerPage')">Next ➡️</button>
-</div>
+<!-- MAIN PAGE -->
+<div id="mainPage" class="page">
+  <h2>👷 Work App</h2>
+  <p>Yaha aap kaam dhund sakte ho ya kaam de sakte ho</p>
 
-<!-- REGISTER -->
-<div id="registerPage" class="page">
-  <h2>Create Account</h2>
-
-  <input id="name" placeholder="Name"><br>
-  <input id="phone" placeholder="Mobile Number"><br>
-  <input placeholder="Enter OTP"><br>
-
-  <button onclick="createAccount()">Submit</button>
-</div>
-
-<!-- ROLE -->
-<div id="rolePage" class="page">
-  <h2>Select Option</h2>
-
-  <button onclick="goWorker()">🔍 Kaam Dhundna</button>
-  <button onclick="goEmployer()">📢 Kaam Dena</button>
-</div>
-
-<!-- WORKER -->
-<div id="workerPage" class="page">
-  <h2>Find Work</h2>
-
-  <button onclick="selectSkill('Construction')">Construction</button>
-  <button onclick="selectSkill('Cully')">Cully</button>
-
-  <button onclick="getLocation()">Send Location 📍</button>
-</div>
-
-<!-- EMPLOYER -->
-<div id="employerPage" class="page">
-  <h2>Give Work</h2>
-
-  <input id="workDetail" placeholder="Kaam ka detail likho"><br>
-  <button onclick="submitWork()">Submit Work</button>
-
-  <button onclick="getLocation()">Send Location 📍</button>
+  <button onclick="alert('Create Account Feature')">Create Account</button>
 </div>
 
 <script>
-
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-});
-
-function installApp() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-  }
-  nextPage('welcomePage');
+function nextPage() {
+  document.getElementById("welcomePage").style.display = "none";
+  document.getElementById("mainPage").classList.add("active");
 }
-
-function nextPage(pageId) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
-}
-
-function createAccount() {
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-
-  if(name && phone){
-    alert("Account Created ✅");
-    nextPage('rolePage');
-  } else {
-    alert("Details fill karo");
-  }
-}
-
-function goWorker() {
-  nextPage('workerPage');
-}
-
-function goEmployer() {
-  nextPage('employerPage');
-}
-
-function selectSkill(skill) {
-  alert("Searching work for: " + skill);
-}
-
-function submitWork() {
-  let work = document.getElementById("workDetail").value;
-  alert("Work Posted: " + work);
-}
-
-function getLocation() {
-  navigator.geolocation.getCurrentPosition((pos) => {
-    alert("Location: " + pos.coords.latitude + ", " + pos.coords.longitude);
-  });
-}
-
 </script>
 
 </body>
