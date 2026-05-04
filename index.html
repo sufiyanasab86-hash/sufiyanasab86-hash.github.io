@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,12 +7,13 @@
 
 <style>
 body {
-  font-family: Arial;
   margin: 0;
+  font-family: Arial;
   text-align: center;
   background: #f4f4f4;
 }
 
+/* Pages */
 .page {
   display: none;
   padding: 20px;
@@ -22,127 +23,41 @@ body {
   display: block;
 }
 
+/* Welcome */
+#welcome {
+  height: 100vh;
+  background: linear-gradient(135deg,#0078d4,#00c6ff);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Floating girl */
+.girl {
+  width: 180px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Buttons */
 button {
   padding: 12px 20px;
   margin: 10px;
   border: none;
   background: #0078d4;
   color: white;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 16px;
 }
 
-input, select {
-  padding: 10px;
-  margin: 8px;
-  width: 80%;
-}
-</style>
-</head>
-
-<body>
-
-<!-- 🔵 PAGE 1:<div id="welcome" class="page active" style="
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#0078d4,#00c6ff);
-color:white;
-text-align:center;
-">
-
-<!-- Girl Image -->
-<img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
-style="width:200px; animation:float 3s ease-in-out infinite;">
-
-<h1 style="margin-top:20px;">Hello 👋</h1>nextPage('skills')
-<h2>Welcome to MS Office Website</h2>
-
-<button onclick="startApp()" style="
-margin-top:20px;
-background:white;
-color:#0078d4;
-font-weight:bold;">
-Start ➡️
-</button>
-
-</div>
-
-<style>
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
-}
-</style>
-
-<script>
-// 🔊 Voice Welcome
-window.onload = function() {
-  let msg = new SpeechSynthesisUtterance(
-    "Welcome to MS Office Website. Mein aap ka swagat karti hoon"
-  );
-
-  msg.lang = "hi-IN"; // Hindi voice
-  msg.rate = 1;
-  msg.pitch = 1;
-
-  speechSynthesis.speak(msg);
-};
-
-// Next Page
-function startApp() {
-  document.getElementById("welcome").style.display = "none";
-  document.getElementById("skills").style.display = "block";
-}
-</script> 
-
-<!-- 🔵 PAGE 2: SKILLS --><!-- 🔵 SKILLS PAGE -->
-<div id="skills" class="page active"><div id="skills" class="page active">
-
-  <h2 style="margin-bottom:20px;">Choose Your Skill</h2>
-
-  <div class="skill-box" onclick="selectSkill('Construction')">
-    🏗️
-    <h3>Construction Work</h3>
-    <p>Building, Repair, Labour Work</p>
-  </div>
-
-  <div class="skill-box" onclick="selectSkill('Cully')">
-    🧱
-    <h3>Cully Work</h3>
-    <p>Loading, Carry Work</p>
-  </div>
-
-</div>
-
-<style>
-.skill-box {
-  background: white;
-  margin: 15px;
-  padding: 20px;
-  border-radius: 15px;<!-- 🔵 SKILLS PAGE -->
-<div id="skills" class="page active">
-
-  <h2 style="margin-bottom:20px;">Choose Your Skill</h2>
-
-  <div class="skill-box" onclick="selectSkill('Construction')">
-    🏗️
-    <h3>Construction Work</h3>
-    <p>Building, Repair, Labour Work</p>
-  </div>
-
-  <div class="skill-box" onclick="selectSkill('Cully')">
-    🧱
-    <h3>Cully Work</h3>
-    <p>Loading, Carry Work</p>
-  </div>
-
-</div>
-
-<style>
+/* Skills UI */
 .skill-box {
   background: white;
   margin: 15px;
@@ -159,50 +74,66 @@ function startApp() {
   color: white;
 }
 
-.skill-box h3 {
-  margin: 10px 0 5px;
+/* Form */
+input, select {
+  padding: 10px;
+  margin: 8px;
+  width: 80%;
 }
 </style>
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: 0.3s;
-}
+</head>
 
-.skill-box:hover {
-  transform: scale(1.05);
-  background: #0078d4;
-  color: white;
-}
+<body>
 
-.skill-box h3 {
-  margin: 10px 0 5px;
-}
-</style>
-<div id="skills" class="page">
-  <h2>Select Your Skill</h2>
-  <button onclick="selectSkill('Construction')">Construction Work</button>
-  <button onclick="selectSkill('Cully')">Cully Work</button>
+<!-- 🔵 WELCOME PAGE -->
+<div id="welcome" class="page active">
+
+  <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" class="girl">
+
+  <h1>👋 Hello</h1>
+  <h2>Welcome to MS Office Website</h2>
+
+  <button onclick="goToSkills()">Start ➡️</button>
 </div>
 
-<!-- 🔵 PAGE 3: CREATE ACCOUNT -->
+<!-- 🔵 SKILLS PAGE -->
+<div id="skills" class="page">
+
+  <h2>Select Your Skill</h2>
+
+  <div class="skill-box" onclick="selectSkill('Construction')">
+    🏗️
+    <h3>Construction Work</h3>
+  </div>
+
+  <div class="skill-box" onclick="selectSkill('Cully')">
+    🧱
+    <h3>Cully Work</h3>
+  </div>
+
+</div>
+
+<!-- 🔵 ACCOUNT PAGE -->
 <div id="account" class="page">
+
   <h2>Create Account</h2>
 
   <p>Select Type:</p>
+
   <button onclick="showWorker()">I want Work</button>
   <button onclick="showProvider()">I want Workers</button>
 
-  <!-- Worker Form -->
+  <!-- Worker -->
   <div id="workerForm" style="display:none;">
     <h3>Worker Form</h3>
-    <input type="text" placeholder="Your Name"><br>
+    <input type="text" placeholder="Name"><br>
     <input type="text" id="skillInput" placeholder="Skill"><br>
     <input type="text" placeholder="Work Type"><br>
     <input type="number" placeholder="Mobile Number"><br>
     <button onclick="submitWorker()">Submit</button>
   </div>
 
-  <!-- Provider Form -->
+  <!-- Provider -->
   <div id="providerForm" style="display:none;">
     <h3>Work Provider Form</h3>
     <input type="text" placeholder="Work Type"><br>
@@ -215,63 +146,62 @@ function startApp() {
 
 <script>
 
-// Page Switch
-function nextPage(pageId) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
+/* Page Navigation */
+function goToSkills() {
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("skills").classList.add("active");
 }
 
-// Skill Select
+/* Skill Select */
 function selectSkill(skill) {
+  localStorage.setItem("skill", skill);
+  document.getElementById("skills").style.display = "none";
+  document.getElementById("account").classList.add("active");
+
   document.getElementById("skillInput").value = skill;
-  nextPage('account');
 }
 
-// Show Worker Form
+/* Role Forms */
 function showWorker() {
   document.getElementById("workerForm").style.display = "block";
   document.getElementById("providerForm").style.display = "none";
 }
 
-// Show Provider Form
 function showProvider() {
   document.getElementById("providerForm").style.display = "block";
   document.getElementById("workerForm").style.display = "none";
 }
 
-// Submit Worker
+/* Submit */
 function submitWorker() {
   alert("Worker Account Created ✅");
 }
 
-// Submit Provider
 function submitProvider() {
   alert("Work Posted Successfully ✅");
 }
 
-// Location Feature
+/* Location */
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(pos) {
       document.getElementById("location").value =
         pos.coords.latitude + ", " + pos.coords.longitude;
     });
-  } else {
-    alert("Location not supported");
   }
 }
 
-</script><script>
-function selectSkill(skill) {
-  localStorage.setItem("selectedSkill", skill);
-
-  // Skills page hide
-  document.getElementById("skills").style.display = "none";
-
-  // Create account show
-  document.getElementById("account").style.display = "block";
+/* 🔊 Voice Welcome */
+window.onload = function() {
+  let msg = new SpeechSynthesisUtterance(
+    "Welcome to MS Office Website. Mein aap ka swagat karti hoon"
+  );
+  msg.lang = "hi-IN";
+  speechSynthesis.speak(msg);
 }
+
 </script>
 
 </body>
 </html>
+  
