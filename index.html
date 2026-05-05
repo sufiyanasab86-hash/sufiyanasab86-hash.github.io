@@ -128,7 +128,10 @@ button {
     <input placeholder="Name"><br><br>
     <input placeholder="Skill"><br><br>
     <input placeholder="Mobile"><br><br>
-    <button onclick="alert('Worker Account Created ✅')">Submit</button>
+    <button onclick="alert('Worker Account Created ✅')">Submit</button><input id="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+
+<button onclick="signup()">Create Account</button>
   </div>
 
   <!-- Provider -->
@@ -141,7 +144,61 @@ button {
 
 </div>
 
-<script>
+<script<script type="module">
+
+// Firebase imports
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+// Firebase config (apna wala paste karo)
+const firebaseConfig = {
+  apiKey: "XXXX",
+  authDomain: "XXXX",
+  projectId: "XXXX"
+};
+
+// Initialize
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// --------- TUMHARA PURANA CODE ---------
+
+window.nextPage = function(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+window.openSkill = function(skill){
+  document.getElementById("skillTitle").innerText = skill;
+  nextPage('detail');
+}
+
+window.showWorker = function(){
+  workerForm.style.display="block";
+  providerForm.style.display="none";
+}
+
+window.showProvider = function(){
+  providerForm.style.display="block";
+  workerForm.style.display="none";
+}
+
+// --------- FIREBASE SIGNUP ---------
+
+window.signup = function(){
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(()=>{
+      alert("Account Created ✅");
+    })
+    .catch((error)=>{
+      alert(error.message);
+    });
+}
+
+</script>
 
 // navigation
 function nextPage(id){
@@ -181,7 +238,7 @@ window.onload = function(){
   speechSynthesis.speak(msg);
 }
 
-</script>
+ <//script/body>
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -203,5 +260,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-</body>
+
 </html>
