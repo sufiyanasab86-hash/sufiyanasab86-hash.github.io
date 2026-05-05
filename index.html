@@ -6,157 +6,178 @@
 <title>MS Office Work App</title>
 
 <style>
-body { font-family: Arial; margin: 0; text-align: center; background:#f4f4f4; }
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color: white;
+  text-align: center;
+}
 
+/* pages */
 .page { display:none; padding:20px; }
 .active { display:block; }
 
-button {
-  padding:12px 20px;
-  margin:10px;
-  background:#0078d4;
-  color:white;
-  border:none;
-  border-radius:8px;
-}
-
-/* Welcome */
+/* 3D welcome */
 #welcome {
-  height:100vh;
+  height: 100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:#0078d4;
-  color:white;
 }
 
-/* Skills Grid */
-.skills-grid {
+.avatar {
+  font-size:100px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+button {
+  padding:12px 20px;
+  margin:10px;
+  border:none;
+  border-radius:8px;
+  background:#00c6ff;
+  color:black;
+  font-weight:bold;
+}
+
+/* skills grid */
+.skills {
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns: repeat(2,1fr);
   gap:10px;
 }
 
-.card {
+.skill {
   background:white;
+  color:black;
   border-radius:10px;
-  padding:10px;
-  cursor:pointer;
+  overflow:hidden;
 }
 
-.card img {
+.skill img {
   width:100%;
-  border-radius:10px;
+  height:120px;
+  object-fit:cover;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 1️⃣ Welcome Page -->
+<!-- 🔥 1. 3D WELCOME -->
 <div id="welcome" class="page active">
-  <h1>Welcome to MS Office Website</h1>
+  <div class="avatar">👩</div>
+  <h1>Welcome 👋</h1>
+  <h2>Welcome to MS Office Website</h2>
   <button onclick="nextPage('skills')">Start ➡</button>
 </div>
 
-<!-- 2️⃣ Skills Page -->
+<!-- 🔥 2. SKILLS -->
 <div id="skills" class="page">
-  <h2>Select Work Type</h2>
+  <h2>Select Skill</h2>
 
-  <div class="skills-grid">
+  <div class="skills">
 
-    <div class="card" onclick="openWork('Construction')">
+    <div class="skill" onclick="openSkill('Construction Work')">
       <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e">
-      <p>Construction Work</p>
+      <p>Construction</p>
     </div>
 
-    <div class="card" onclick="openWork('Electrician')">
-      <img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0">
+    <div class="skill" onclick="openSkill('Electrician Work')">
+      <img src="https://images.unsplash.com/photo-1581092919534-2b1b0b6b3e4b">
       <p>Electrician</p>
     </div>
 
-    <div class="card" onclick="openWork('Cully')">
-      <img src="https://images.unsplash.com/photo-1604147706283-3e7a9c1d9b3b">
+    <div class="skill" onclick="openSkill('Cully Work')">
+      <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
       <p>Cully Work</p>
     </div>
 
-    <div class="card" onclick="openWork('Supari')">
-      <img src="https://images.unsplash.com/photo-1598514983318-2f64f8f4796c">
+    <div class="skill" onclick="openSkill('Supari Work')">
+      <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2">
       <p>Supari Work</p>
     </div>
 
   </div>
 </div>
 
-<!-- 3️⃣ Work Details -->
-<div id="work" class="page">
-  <h2 id="workTitle"></h2>
-
-  <p id="workDetail"></p>
-
-  <button onclick="goAccount()">Apply for Work</button>
+<!-- 🔥 3. DETAIL -->
+<div id="detail" class="page">
+  <h2 id="skillTitle"></h2>
+  <p>Yaha is kaam ke liye workers chahiye. Nearby location available.</p>
+  <button onclick="nextPage('account')">Apply Work</button>
 </div>
 
-<!-- 4️⃣ Account Page -->
+<!-- 🔥 4. ACCOUNT -->
 <div id="account" class="page">
   <h2>Create Account</h2>
 
-  <input placeholder="Name"><br><br>
-  <input id="skillInput" placeholder="Skill"><br><br>
-  <input placeholder="Mobile Number"><br><br>
+  <button onclick="showWorker()">I Want Work</button>
+  <button onclick="showProvider()">I Want Worker</button>
 
-  <button onclick="submitAccount()">Create Account</button>
+  <!-- Worker -->
+  <div id="workerForm" style="display:none;">
+    <input placeholder="Name"><br><br>
+    <input placeholder="Skill"><br><br>
+    <input placeholder="Mobile"><br><br>
+    <button onclick="alert('Worker Account Created ✅')">Submit</button>
+  </div>
+
+  <!-- Provider -->
+  <div id="providerForm" style="display:none;">
+    <input placeholder="Work Type"><br><br>
+    <input id="location" placeholder="Location"><br><br>
+    <button onclick="getLocation()">Get Location</button><br><br>
+    <button onclick="alert('Work Posted ✅')">Submit</button>
+  </div>
+
 </div>
 
 <script>
 
-/* Navigation */
+// navigation
 function nextPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-/* Open Work Detail */
-function openWork(skill){
-  nextPage('work');
-
-  document.getElementById("workTitle").innerText = skill + " Work";
-
-  let detail = "";
-
-  if(skill === "Construction"){
-    detail = "Location: Bangalore\nWorkers needed for building work. Immediate joining.";
-  }
-  else if(skill === "Electrician"){
-    detail = "Location: Hyderabad\nElectric work available for house wiring.";
-  }
-  else if(skill === "Cully"){
-    detail = "Location: Market Area\nLoading/unloading workers needed.";
-  }
-  else if(skill === "Supari"){
-    detail = "Location: Village Area\nSupari collecting work available in farms.";
-  }
-
-  document.getElementById("workDetail").innerText = detail;
-
-  document.getElementById("skillInput").value = skill;
+// skill click
+function openSkill(skill){
+  document.getElementById("skillTitle").innerText = skill;
+  nextPage('detail');
 }
 
-/* Go Account */
-function goAccount(){
-  nextPage('account');
+// role
+function showWorker(){
+  workerForm.style.display="block";
+  providerForm.style.display="none";
+}
+function showProvider(){
+  providerForm.style.display="block";
+  workerForm.style.display="none";
 }
 
-/* Submit */
-function submitAccount(){
-  alert("Account Created ✅ Now you can apply for work");
+// location
+function getLocation(){
+  navigator.geolocation.getCurrentPosition(pos=>{
+    location.value = pos.coords.latitude + "," + pos.coords.longitude;
+  });
 }
 
-/* Voice Welcome */
+// 🔥 voice girl welcome
 window.onload = function(){
-  let msg = new SpeechSynthesisUtterance("Welcome to MS Office Website, aap ka swagat hai");
-  msg.lang = "hi-IN";
+  let msg = new SpeechSynthesisUtterance(
+    "Welcome to MS Office Website. Aap ka swagat hai"
+  );
+  msg.lang="hi-IN";
   speechSynthesis.speak(msg);
 }
 
