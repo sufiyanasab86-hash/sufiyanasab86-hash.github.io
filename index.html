@@ -107,10 +107,6 @@ box-shadow:0 3px 10px rgba(0,0,0,0.08);
 transition:0.3s;
 }
 
-.card:hover{
-transform:translateY(-5px);
-}
-
 .card img{
 width:100%;
 height:130px;
@@ -129,7 +125,7 @@ font-size:14px;
 color:#666;
 }
 
-/* DETAIL PAGE */
+/* DETAIL */
 
 .detail{
 padding:20px;
@@ -223,8 +219,6 @@ display:block;
 
 <body>
 
-<!-- HEADER -->
-
 <header>
 <div class="logo">
 <div class="logo-box">M</div>
@@ -234,7 +228,7 @@ display:block;
 <div class="menu">☰</div>
 </header>
 
-<!-- WELCOME PAGE -->
+<!-- WELCOME -->
 
 <div id="welcome" class="page active">
 
@@ -243,7 +237,7 @@ display:block;
 <h2>👋 Welcome to MS Office Website</h2>
 
 <p>
-Find workers, jobs and village work easily with modern skills platform.
+Find workers and jobs easily.
 </p>
 
 <button class="start-btn" onclick="nextPage('skills')">
@@ -254,7 +248,7 @@ Start
 
 </div>
 
-<!-- SKILLS PAGE -->
+<!-- SKILLS -->
 
 <div id="skills" class="page">
 
@@ -263,7 +257,7 @@ Start
 <div class="card" onclick="openDetail(
 'Construction Work',
 'https://images.unsplash.com/photo-1504307651254-35680f356dfd',
-'Construction workers needed for building and village projects.'
+'Construction workers needed.'
 )">
 <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd">
 <h3>Construction</h3>
@@ -273,7 +267,7 @@ Start
 <div class="card" onclick="openDetail(
 'Electrician Work',
 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4',
-'Electrician workers needed for home and office wiring.'
+'Electrician workers needed.'
 )">
 <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4">
 <h3>Electrician</h3>
@@ -283,17 +277,17 @@ Start
 <div class="card" onclick="openDetail(
 'Cully Work',
 'https://images.unsplash.com/photo-1517048676732-d65bc937f952',
-'Cully workers needed for market and loading work.'
+'Cully workers needed.'
 )">
 <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952">
 <h3>Cully Work</h3>
-<p>Loading and helper jobs</p>
+<p>Loading jobs</p>
 </div>
 
 <div class="card" onclick="openDetail(
 'Supari Work',
 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6',
-'Village supari collection workers needed.'
+'Village supari workers needed.'
 )">
 <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6">
 <h3>Supari Work</h3>
@@ -304,7 +298,7 @@ Start
 
 </div>
 
-<!-- DETAIL PAGE -->
+<!-- DETAIL -->
 
 <div id="detail" class="page">
 
@@ -324,7 +318,7 @@ Apply Now
 
 </div>
 
-<!-- ACCOUNT PAGE -->
+<!-- ACCOUNT -->
 
 <div id="account" class="page">
 
@@ -344,14 +338,18 @@ I Want Worker
 
 <div id="workerForm" class="form-box">
 
-<input type="text" placeholder="Name">
+<input type="text" id="workerName" placeholder="Name">
 
-<input type="text" placeholder="Skill">
+<input type="text" id="workerSkill" placeholder="Skill">
 
-<input type="number" placeholder="Mobile Number">
+<input type="number" id="workerMobile" placeholder="Mobile Number">
 
-<button class="submit-btn">
-Submit
+<input type="email" id="workerEmail" placeholder="Email">
+
+<input type="password" id="workerPassword" placeholder="Password">
+
+<button class="submit-btn" onclick="registerWorker()">
+Register
 </button>
 
 </div>
@@ -360,11 +358,11 @@ Submit
 
 <div id="providerForm" class="form-box">
 
-<input type="text" placeholder="Work Type">
+<input type="text" id="providerWork" placeholder="Work Type">
 
-<input type="text" placeholder="Location">
+<input type="text" id="providerLocation" placeholder="Location">
 
-<input type="number" placeholder="Mobile Number">
+<input type="number" id="providerMobile" placeholder="Mobile Number">
 
 <button class="submit-btn">
 Post Work
@@ -376,9 +374,43 @@ Post Work
 
 </div>
 
-<script>
+<script type="module">
 
-function nextPage(id){
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getAuth,
+createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+setDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+apiKey: "AIzaSyA...",
+authDomain: "ms-office-app.firebaseapp.com",
+projectId: "ms-office-app",
+storageBucket: "ms-office-app.appspot.com",
+messagingSenderId: "819697343763",
+appId: "1:819697343763:web:5fe07875c5281cc1f20ee6"
+};
+
+/* INIT */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+/* NAVIGATION */
+
+window.nextPage = function(id){
 
 document.querySelectorAll('.page').forEach(page=>{
 page.classList.remove('active');
@@ -388,7 +420,9 @@ document.getElementById(id).classList.add('active');
 
 }
 
-function openDetail(title,img,text){
+/* DETAIL */
+
+window.openDetail = function(title,img,text){
 
 document.getElementById('detailTitle').innerText=title;
 
@@ -400,7 +434,9 @@ nextPage('detail');
 
 }
 
-function showWorker(){
+/* FORM */
+
+window.showWorker = function(){
 
 document.getElementById('workerForm').style.display='block';
 
@@ -408,11 +444,63 @@ document.getElementById('providerForm').style.display='none';
 
 }
 
-function showProvider(){
+window.showProvider = function(){
 
 document.getElementById('providerForm').style.display='block';
 
 document.getElementById('workerForm').style.display='none';
+
+}
+
+/* REGISTER */
+
+window.registerWorker = async function(){
+
+const name=document.getElementById('workerName').value;
+
+const skill=document.getElementById('workerSkill').value;
+
+const mobile=document.getElementById('workerMobile').value;
+
+const email=document.getElementById('workerEmail').value;
+
+const password=document.getElementById('workerPassword').value;
+
+if(!name || !skill || !mobile || !email || !password){
+
+alert("Please fill all fields");
+
+return;
+
+}
+
+try{
+
+const userCredential = await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+const user = userCredential.user;
+
+await setDoc(doc(db,"workers",user.uid),{
+
+name:name,
+skill:skill,
+mobile:mobile,
+email:email
+
+});
+
+alert("Registration Successful ✅");
+
+}
+catch(error){
+
+alert(error.message);
+
+}
 
 }
 
