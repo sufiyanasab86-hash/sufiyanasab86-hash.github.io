@@ -1,167 +1,420 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MS Office App</title>
+<title>MS Office Website</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
 body{
-  margin:0;
-  font-family:Arial;
-  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  color:white;
-  text-align:center;
+background:#f5f7fb;
+color:#111;
 }
 
-.page{display:none;padding:20px;}
-.active{display:block;}
+/* HEADER */
 
-button{
-  padding:12px;
-  border:none;
-  border-radius:8px;
-  background:#00c6ff;
-  margin:10px;
+header{
+background:white;
+padding:18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
-input{
-  padding:10px;
-  width:80%;
-  margin:5px;
-  border-radius:6px;
-  border:none;
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
 }
 
-/* Skills UI */
+.logo-box{
+width:45px;
+height:45px;
+background:#0b57d0;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+font-weight:bold;
+border-radius:10px;
+}
+
+.logo h1{
+font-size:24px;
+}
+
+.menu{
+font-size:28px;
+}
+
+/* HERO */
+
+.hero{
+padding:35px 20px;
+}
+
+.hero h2{
+font-size:42px;
+line-height:1.1;
+margin-bottom:18px;
+}
+
+.hero p{
+font-size:17px;
+color:#555;
+margin-bottom:25px;
+}
+
+.start-btn{
+background:#0b57d0;
+color:white;
+border:none;
+padding:14px 30px;
+font-size:18px;
+border-radius:12px;
+}
+
+/* SKILLS */
+
 .skills{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+padding:20px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
 }
 
-.skill{
-  background:white;
-  color:black;
-  border-radius:10px;
-  overflow:hidden;
+.card{
+background:white;
+border-radius:18px;
+padding:18px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+transition:0.3s;
 }
 
-.skill img{
-  width:100%;
-  height:120px;
-  object-fit:cover;
+.card:hover{
+transform:translateY(-5px);
 }
+
+.card img{
+width:100%;
+height:130px;
+object-fit:cover;
+border-radius:14px;
+margin-bottom:12px;
+}
+
+.card h3{
+font-size:20px;
+margin-bottom:8px;
+}
+
+.card p{
+font-size:14px;
+color:#666;
+}
+
+/* DETAIL PAGE */
+
+.detail{
+padding:20px;
+}
+
+.detail img{
+width:100%;
+border-radius:18px;
+margin-bottom:20px;
+}
+
+.detail h2{
+font-size:32px;
+margin-bottom:10px;
+}
+
+.detail p{
+font-size:16px;
+color:#555;
+margin-bottom:20px;
+}
+
+.apply-btn{
+background:#0b57d0;
+color:white;
+padding:14px;
+width:100%;
+border:none;
+border-radius:12px;
+font-size:18px;
+}
+
+/* ACCOUNT */
+
+.account{
+padding:20px;
+}
+
+.account h2{
+font-size:32px;
+margin-bottom:20px;
+}
+
+.select-btn{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border:none;
+background:#0b57d0;
+color:white;
+font-size:17px;
+border-radius:12px;
+}
+
+.form-box{
+display:none;
+margin-top:20px;
+}
+
+.form-box input{
+width:100%;
+padding:14px;
+margin-bottom:14px;
+border-radius:12px;
+border:1px solid #ccc;
+font-size:16px;
+}
+
+.submit-btn{
+width:100%;
+padding:14px;
+background:#0b57d0;
+color:white;
+border:none;
+border-radius:12px;
+font-size:18px;
+}
+
+/* PAGE */
+
+.page{
+display:none;
+}
+
+.active{
+display:block;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- WELCOME -->
+<!-- HEADER -->
+
+<header>
+<div class="logo">
+<div class="logo-box">M</div>
+<h1>MS Office</h1>
+</div>
+
+<div class="menu">☰</div>
+</header>
+
+<!-- WELCOME PAGE -->
+
 <div id="welcome" class="page active">
-  <h1>👋 Welcome</h1>
-  <h2>Welcome to MS Office Website</h2>
-  <button onclick="nextPage('skills')">Start</button>
+
+<div class="hero">
+
+<h2>👋 Welcome to MS Office Website</h2>
+
+<p>
+Find workers, jobs and village work easily with modern skills platform.
+</p>
+
+<button class="start-btn" onclick="nextPage('skills')">
+Start
+</button>
+
 </div>
 
-<!-- SKILLS -->
+</div>
+
+<!-- SKILLS PAGE -->
+
 <div id="skills" class="page">
-  <h2>Select Skill</h2>
 
-  <div class="skills">
+<div class="skills">
 
-    <div class="skill" onclick="openSkill('Construction Work')">
-      <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e">
-      <p>Construction</p>
-    </div>
-
-    <div class="skill" onclick="openSkill('Electrician Work')">
-      <img src="https://images.unsplash.com/photo-1581092919534-2b1b0b6b3e4b">
-      <p>Electrician</p>
-    </div>
-
-    <div class="skill" onclick="openSkill('Cully Work')">
-      <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
-      <p>Cully Work</p>
-    </div>
-
-    <div class="skill" onclick="openSkill('Supari Work')">
-      <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2">
-      <p>Supari Work</p>
-    </div>
-
-  </div>
+<div class="card" onclick="openDetail(
+'Construction Work',
+'https://images.unsplash.com/photo-1504307651254-35680f356dfd',
+'Construction workers needed for building and village projects.'
+)">
+<img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd">
+<h3>Construction</h3>
+<p>Building work jobs</p>
 </div>
 
-<!-- DETAIL -->
+<div class="card" onclick="openDetail(
+'Electrician Work',
+'https://images.unsplash.com/photo-1621905252507-b35492cc74b4',
+'Electrician workers needed for home and office wiring.'
+)">
+<img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4">
+<h3>Electrician</h3>
+<p>Electric fitting jobs</p>
+</div>
+
+<div class="card" onclick="openDetail(
+'Cully Work',
+'https://images.unsplash.com/photo-1517048676732-d65bc937f952',
+'Cully workers needed for market and loading work.'
+)">
+<img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952">
+<h3>Cully Work</h3>
+<p>Loading and helper jobs</p>
+</div>
+
+<div class="card" onclick="openDetail(
+'Supari Work',
+'https://images.unsplash.com/photo-1501004318641-b39e6451bec6',
+'Village supari collection workers needed.'
+)">
+<img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6">
+<h3>Supari Work</h3>
+<p>Village field work</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- DETAIL PAGE -->
+
 <div id="detail" class="page">
-  <h2 id="skillTitle"></h2>
-  <p>Yaha kaam available hai. Apply karne ke liye niche button dabao.</p>
-  <button onclick="nextPage('account')">Apply</button>
+
+<div class="detail">
+
+<img id="detailImg" src="">
+
+<h2 id="detailTitle"></h2>
+
+<p id="detailText"></p>
+
+<button class="apply-btn" onclick="nextPage('account')">
+Apply Now
+</button>
+
 </div>
 
-<!-- ACCOUNT -->
+</div>
+
+<!-- ACCOUNT PAGE -->
+
 <div id="account" class="page">
-  <h2>Create Account</h2>
 
-  <button onclick="showWorker()">I Want Work</button>
-  <button onclick="showProvider()">I Want Worker</button>
+<div class="account">
 
-  <!-- Worker -->
-  <div id="workerForm" style="display:none;">
-    <input id="name" placeholder="Name"><br>
-    <input id="skill" placeholder="Skill"><br>
-    <input id="mobile" placeholder="Mobile"><br>
-    <button onclick="submitWorker()">Submit</button>
-  </div>
+<h2>Create Account</h2>
 
-  <!-- Provider -->
-  <div id="providerForm" style="display:none;">
-    <input placeholder="Work Type"><br>
-    <input id="location" placeholder="Location"><br>
-    <button onclick="getLocation()">Get Location</button><br>
-    <button onclick="alert('Work Posted')">Submit</button>
-  </div>
+<button class="select-btn" onclick="showWorker()">
+I Want Work
+</button>
+
+<button class="select-btn" onclick="showProvider()">
+I Want Worker
+</button>
+
+<!-- WORKER -->
+
+<div id="workerForm" class="form-box">
+
+<input type="text" placeholder="Name">
+
+<input type="text" placeholder="Skill">
+
+<input type="number" placeholder="Mobile Number">
+
+<button class="submit-btn">
+Submit
+</button>
+
+</div>
+
+<!-- PROVIDER -->
+
+<div id="providerForm" class="form-box">
+
+<input type="text" placeholder="Work Type">
+
+<input type="text" placeholder="Location">
+
+<input type="number" placeholder="Mobile Number">
+
+<button class="submit-btn">
+Post Work
+</button>
+
+</div>
+
+</div>
 
 </div>
 
 <script>
-let currentPage = 0;
 
-const pages = document.querySelectorAll(".page");
+function nextPage(id){
 
-function showPage(index) {
-  pages.forEach((page, i) => {
-    page.style.display = i === index ? "block" : "none";
-  });
+document.querySelectorAll('.page').forEach(page=>{
+page.classList.remove('active');
+});
+
+document.getElementById(id).classList.add('active');
+
 }
 
-function nextPage(id) {
-  const target = document.getElementById(id);
+function openDetail(title,img,text){
 
-  pages.forEach(page => {
-    page.style.display = "none";
-  });
+document.getElementById('detailTitle').innerText=title;
 
-  target.style.display = "block";
+document.getElementById('detailImg').src=img;
+
+document.getElementById('detailText').innerText=text;
+
+nextPage('detail');
+
 }
 
-function openSkill(skill) {
-  document.getElementById("skillTitle").innerText = skill;
-  nextPage("detail");
+function showWorker(){
+
+document.getElementById('workerForm').style.display='block';
+
+document.getElementById('providerForm').style.display='none';
+
 }
 
-function showWorker() {
-  document.getElementById("workerForm").style.display = "block";
-  document.getElementById("providerForm").style.display = "none";
-}
+function showProvider(){
 
-function showProvider() {
-  document.getElementById("providerForm").style.display = "block";
-  document.getElementById("workerForm").style.display = "none";
-}
+document.getElementById('providerForm').style.display='block';
 
-showPage(0);
-</script>
+document.getElementById('workerForm').style.display='none';
+
+}
 
 </script>
 
