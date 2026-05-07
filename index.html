@@ -410,113 +410,27 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+ // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAR_sJeap_o_W-gLCeemiRUeRNkOIz4j2I",
+  authDomain: "ms-office-app.firebaseapp.com",
+  projectId: "ms-office-app",
+  storageBucket: "ms-office-app.firebasestorage.app",
+  messagingSenderId: "819697343763",
+  appId: "1:819697343763:web:5fe07875c5281cc1f20ee6",
+  measurementId: "G-EKJ8E1LT3C"
+};
+
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
-/* INIT */
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const db = getFirestore(app);
-
-/* NAVIGATION */
-
-window.nextPage = function(id){
-
-document.querySelectorAll('.page').forEach(page=>{
-page.classList.remove('active');
-});
-
-document.getElementById(id).classList.add('active');
-
-}
-
-/* DETAIL */
-
-window.openDetail = function(title,img,text){
-
-document.getElementById('detailTitle').innerText=title;
-
-document.getElementById('detailImg').src=img;
-
-document.getElementById('detailText').innerText=text;
-
-nextPage('detail');
-
-}
-
-/* FORM */
-
-window.showWorker = function(){
-
-document.getElementById('workerForm').style.display='block';
-
-document.getElementById('providerForm').style.display='none';
-
-}
-
-window.showProvider = function(){
-
-document.getElementById('providerForm').style.display='block';
-
-document.getElementById('workerForm').style.display='none';
-
-}
-
-/* REGISTER */
-
-window.registerWorker = async function(){
-
-const name=document.getElementById('workerName').value;
-
-const skill=document.getElementById('workerSkill').value;
-
-const mobile=document.getElementById('workerMobile').value;
-
-const email=document.getElementById('workerEmail').value;
-
-const password=document.getElementById('workerPassword').value;
-
-if(!name || !skill || !mobile || !email || !password){
-
-alert("Please fill all fields");
-
-return;
-
-}
-
-try{
-
-const userCredential = await createUserWithEmailAndPassword(
-auth,
-email,
-password
-);
-
-const user = userCredential.user;
-
-await setDoc(doc(db,"workers",user.uid),{
-
-name:name,
-skill:skill,
-mobile:mobile,
-email:email
-
-});
-
-alert("Registration Successful ✅");
-
-}
-catch(error){
-
-alert(error.message);
-
-}
-
-}
-
 </script>
 
 </body>
