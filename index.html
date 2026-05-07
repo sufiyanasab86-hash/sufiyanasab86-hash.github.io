@@ -124,71 +124,44 @@ input{
 
 </div>
 
-<!-- FIREBASE -->
-<script type="module">
+<script>
+let currentPage = 0;
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const pages = document.querySelectorAll(".page");
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA...",
-  authDomain: "ms-office-app.firebaseapp.com",
-  projectId: "ms-office-app",
-  storageBucket: "ms-office-app.appspot.com",
-  messagingSenderId: "819697343763",
-  appId: "1:819697343763:web:5fe07875c5281cc1f20ee6"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// navigation
-window.nextPage = function(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+function showPage(index) {
+  pages.forEach((page, i) => {
+    page.style.display = i === index ? "block" : "none";
+  });
 }
 
-// skill click
-window.openSkill = function(skill){
+function nextPage(id) {
+  const target = document.getElementById(id);
+
+  pages.forEach(page => {
+    page.style.display = "none";
+  });
+
+  target.style.display = "block";
+}
+
+function openSkill(skill) {
   document.getElementById("skillTitle").innerText = skill;
-  nextPage('detail');
+  nextPage("detail");
 }
 
-// role
-window.showWorker = function(){
-  workerForm.style.display="block";
-  providerForm.style.display="none";
+function showWorker() {
+  document.getElementById("workerForm").style.display = "block";
+  document.getElementById("providerForm").style.display = "none";
 }
 
-window.showProvider = function(){
-  providerForm.style.display="block";
-  workerForm.style.display="none";
+function showProvider() {
+  document.getElementById("providerForm").style.display = "block";
+  document.getElementById("workerForm").style.display = "none";
 }
 
-// save worker
-window.submitWorker = async function(){
-  let name = document.getElementById("name").value;
-  let skill = document.getElementById("skill").value;
-  let mobile = document.getElementById("mobile").value;
-
-  if(!name || !skill || !mobile){
-    alert("Fill all fields");
-    return;
-  }
-
-  await addDoc(collection(db,"workers"),{
-    name,skill,mobile,time:new Date()
-  });
-
-  alert("Saved in Firebase ✅");
-}
-
-// location
-window.getLocation = function(){
-  navigator.geolocation.getCurrentPosition(pos=>{
-    location.value = pos.coords.latitude + "," + pos.coords.longitude;
-  });
-}
+showPage(0);
+</script>
 
 </script>
 
