@@ -391,14 +391,27 @@ setDoc
 
 /* FIREBASE CONFIG */
 
+const firebaseConfig// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-apiKey: "AIzaSyA...",
-authDomain: "ms-office-app.firebaseapp.com",
-projectId: "ms-office-app",
-storageBucket: "ms-office-app.appspot.com",
-messagingSenderId: "819697343763",
-appId: "1:819697343763:web:5fe07875c5281cc1f20ee6"
+  apiKey: "AIzaSyAR_sJeap_o_W-gLCeemiRUeRNkOIz4j2I",
+  authDomain: "ms-office-app.firebaseapp.com",
+  projectId: "ms-office-app",
+  storageBucket: "ms-office-app.firebasestorage.app",
+  messagingSenderId: "819697343763",
+  appId: "1:819697343763:web:5fe07875c5281cc1f20ee6",
+  measurementId: "G-EKJ8E1LT3C"
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 /* INIT */
 
