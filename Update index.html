@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MS Word Zombie Survival</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Game Canvas -->
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- UI Overlay -->
+        <div class="ui-overlay">
+            <div class="top-ui">
+                <div class="health-bar">
+                    <div class="health" id="healthBar"></div>
+                </div>
+                <div class="score">Score: <span id="score">0</span></div>
+                <div class="coins">Coins: <span id="coins">0</span></div>
+            </div>
+            
+            <div class="crosshair"></div>
+        </div>
+        
+        <!-- Game Over Screen -->
+        <div class="game-over-screen" id="gameOverScreen">
+            <div class="game-over-content">
+                <h1>Game Over</h1>
+                <p>Final Score: <span id="finalScore">0</span></p>
+                <p>Coins Earned: <span id="finalCoins">0</span></p>
+                <button id="restartBtn" class="restart-btn">Restart</button>
+            </div>
+        </div>
+        
+        <!-- Mobile Controls -->
+        <div class="mobile-controls">
+            <div class="joystick" id="joystick">
+                <div class="joystick-knob"></div>
+            </div>
+            <button class="shoot-btn" id="shootBtn">SHOOT</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
