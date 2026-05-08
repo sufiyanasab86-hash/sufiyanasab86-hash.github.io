@@ -1,39 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MS Office Website</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>MS Office</title>
 
 <style>
-
-*{
+body{
 margin:0;
 padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+font-family:Arial;
+background:#f3f4f6;
 }
-
-body{
-background:#f5f7fb;
-color:#111;
-}
-
-/* HEADER */
 
 header{
 background:white;
-padding:18px;
+padding:15px;
 display:flex;
-justify-content:space-between;
 align-items:center;
-position:sticky;
-top:0;
-z-index:1000;
-box-shadow:0 2px 10px rgba(0,0,0,0.08);
+justify-content:space-between;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
 .logo{
@@ -45,7 +31,7 @@ gap:10px;
 .logo-box{
 width:45px;
 height:45px;
-background:#0b57d0;
+background:#165DFF;
 color:white;
 display:flex;
 align-items:center;
@@ -55,468 +41,189 @@ font-weight:bold;
 border-radius:10px;
 }
 
-.logo h1{
-font-size:24px;
-}
-
 .menu{
-font-size:28px;
+font-size:30px;
+cursor:pointer;
 }
-
-/* HERO */
 
 .hero{
-padding:35px 20px;
+padding:30px;
 }
 
-.hero h2{
-font-size:42px;
+.hero h1{
+font-size:50px;
 line-height:1.1;
-margin-bottom:18px;
-}
-
-.hero p{
-font-size:17px;
-color:#555;
-margin-bottom:25px;
-}
-<button onclick="showRegister()" class="start-btn">
-Start
-</button>
-.start-btn{<div id="register" style="padding:20px;">
-
-<h2>Create Account</h2>
-
-<input type="email" id="email" placeholder="Email">
-
-<br><br>
-
-<input type="password" id="password" placeholder="Password">
-
-<br><br>
-
-<button onclick="register()">
-Register
-</button>
-
-<br><br>
-
-<button onclick="login()">
-Login
-</button>
-
-</div>
-background:#0b57d0;
-color:white;
-border:none;
-padding:14px 30px;
-font-size:18px;
-border-radius:12px;
-}
-
-/* SKILLS */
-
-.skills{
-padding:20px;
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:15px;
-}
-
-.card{
-background:white;
-border-radius:18px;
-padding:18px;
-box-shadow:0 3px 10px rgba(0,0,0,0.08);
-transition:0.3s;
-}
-
-.card img{
-width:100%;
-height:130px;
-object-fit:cover;
-border-radius:14px;
-margin-bottom:12px;
-}
-
-.card h3{
-font-size:20px;
-margin-bottom:8px;
-}
-
-.card p{
-font-size:14px;
-color:#666;
-}
-
-/* DETAIL */
-
-.detail{
-padding:20px;
-}
-
-.detail img{
-width:100%;
-border-radius:18px;
-margin-bottom:20px;
-}
-
-.detail h2{
-font-size:32px;
 margin-bottom:10px;
 }
 
-.detail p{
-font-size:16px;
+.hero p{
+font-size:22px;
 color:#555;
-margin-bottom:20px;
 }
 
-.apply-btn{
-background:#0b57d0;
+.btn{
+background:#165DFF;
 color:white;
-padding:14px;
-width:100%;
 border:none;
-border-radius:12px;
-font-size:18px;
+padding:18px 45px;
+font-size:24px;
+border-radius:15px;
+margin-top:20px;
+cursor:pointer;
 }
 
-/* ACCOUNT */
-
-.account{
+#registerBox,
+#dashboard,
+#menuBox{
+display:none;
+background:white;
 padding:20px;
+margin:20px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-.account h2{
-font-size:32px;
-margin-bottom:20px;
-}
-
-.select-btn{
+input{
 width:100%;
 padding:15px;
-margin-bottom:15px;
-border:none;
-background:#0b57d0;
-color:white;
-font-size:17px;
-border-radius:12px;
-}
-
-.form-box{
-display:none;
-margin-top:20px;
-}
-
-.form-box input{
-width:100%;
-padding:14px;
-margin-bottom:14px;
-border-radius:12px;
-border:1px solid #ccc;
-font-size:16px;
-}
-
-.submit-btn{
-width:100%;
-padding:14px;
-background:#0b57d0;
-color:white;
-border:none;
-border-radius:12px;
 font-size:18px;
+border:1px solid #ccc;
+border-radius:10px;
+margin-top:10px;
 }
 
-/* PAGE */
-
-.page{
-display:none;
+.job-card{
+background:#f3f4f6;
+padding:20px;
+border-radius:15px;
+margin-top:15px;
 }
 
-.active{
-display:block;
+.menu-item{
+padding:15px;
+border-bottom:1px solid #ddd;
+font-size:20px;
 }
-
 </style>
 </head>
-
 <body>
 
 <header>
 <div class="logo">
 <div class="logo-box">M</div>
-<h1>MS Office</h1>
+<h2>MS Office</h2>
 </div>
 
-<div class="menu">☰</div>
+<div class="menu" onclick="openMenu()">☰</div>
 </header>
 
-<!-- WELCOME -->
-
-<div id="welcome" class="page active">
-
 <div class="hero">
+<h1>👋 Welcome to MS Office Website</h1>
+<p>Find workers and jobs easily.</p>
 
-<h2>👋 Welcome to MS Office Website</h2>
-
-<p>
-Find workers and jobs easily.
-</p>
-
-<button class="start-btn" onclick="nextPage('skills')">
-Start <button onclick="openPage()">
+<button class="btn" onclick="showRegister()">
 Start
-
 </button>
-
 </div>
 
-</div>
-
-<!-- SKILLS -->
-
-<div id="skills" class="page">
-
-<div class="skills">
-
-<div class="card" onclick="openDetail(
-'Construction Work',
-'https://images.unsplash.com/photo-1504307651254-35680f356dfd',
-'Construction workers needed.'
-)">
-<img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd">
-<h3>Construction</h3>
-<p>Building work jobs</p>
-</div>
-
-<div class="card" onclick="openDetail(
-'Electrician Work',
-'https://images.unsplash.com/photo-1621905252507-b35492cc74b4',
-'Electrician workers needed.'
-)">
-<img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4">
-<h3>Electrician</h3>
-<p>Electric fitting jobs</p>
-</div>
-
-<div class="card" onclick="openDetail(
-'Cully Work',
-'https://images.unsplash.com/photo-1517048676732-d65bc937f952',
-'Cully workers needed.'
-)">
-<img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952">
-<h3>Cully Work</h3>
-<p>Loading jobs</p>
-</div>
-
-<div class="card" onclick="openDetail(
-'Supari Work',
-'https://images.unsplash.com/photo-1501004318641-b39e6451bec6',
-'Village supari workers needed.'
-)">
-<img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6">
-<h3>Supari Work</h3>
-<p>Village field work</p>
-</div>
-
-</div>
-
-</div>
-
-<!-- DETAIL -->
-
-<div id="detail" class="page">
-
-<div class="detail">
-
-<img id="detailImg" src="">
-
-<h2 id="detailTitle"></h2>
-
-<p id="detailText"></p>
-
-<button class="apply-btn" onclick="nextPage('account')">
-Apply Now
-</button>
-
-</div>
-
-</div>
-
-<!-- ACCOUNT -->
-
-<div id="account" class="page">
-
-<div class="account">
-
-<h2>Create Account</h2>
-<div id="registerBox" style="display:none;padding:20px;">
-
+<div id="registerBox">
 <h2>Create Account</h2>
 
 <input type="email" id="email" placeholder="Enter Email">
 
-<br><br>
-
 <input type="password" id="password" placeholder="Enter Password">
 
-<br><br>
-
-<button onclick="register()">
+<button class="btn" onclick="registerUser()">
 Register
 </button>
 
-<br><br>
-
-<button onclick="login()">
+<button class="btn" onclick="loginUser()">
 Login
 </button>
-
-</div>
-<button class="select-btn" onclick="showWorker()">
-I Want Work
-</button>
-
-<button class="select-btn" onclick="showProvider()">
-I Want Worker
-</button>
-
-<!-- WORKER -->
-
-<div id="workerForm" class="form-box">
-
-<input type="text" id="workerName" placeholder="Name">
-
-<input type="text" id="workerSkill" placeholder="Skill">
-
-<input type="number" id="workerMobile" placeholder="Mobile Number">
-
-<input type="email" id="workerEmail" placeholder="Email">
-
-<input type="password" id="workerPassword" placeholder="Password">
-
-<button class="submit-btn" onclick="registerWorker()">
-Register
-</button>
-
 </div>
 
-<!-- PROVIDER -->
+<div id="dashboard">
+<h2>Available Work</h2>
 
-<div id="providerForm" class="form-box">
-
-<input type="text" id="providerWork" placeholder="Work Type">
-
-<input type="text" id="providerLocation" placeholder="Location">
-
-<input type="number" id="providerMobile" placeholder="Mobile Number">
-
-<button class="submit-btn">
-Post Work
-</button>
-
+<div class="job-card">
+<h3>Office Worker Needed</h3>
+<p>Salary: ₹15,000</p>
 </div>
 
+<div class="job-card">
+<h3>Computer Operator</h3>
+<p>Salary: ₹12,000</p>
 </div>
 
+<div class="job-card">
+<h3>Data Entry Job</h3>
+<p>Salary: ₹10,000</p>
+</div>
 </div>
 
-<script type="module">
+<div id="menuBox">
+<div class="menu-item">👤 Profile</div>
+<div class="menu-item">⚙ Website Settings</div>
+<div class="menu-item" onclick="logoutUser()">🚪 Logout</div>
+</div>
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-getAuth,
-createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
-getFirestore,
-doc,
-setDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-/* FIREBASE CONFIG */
-
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-getAuth,
-createUserWithEmailAndPassword,
-signInWithEmailAndPassword,
-signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAR_sJeap_o_W-gLCeemiRUeRNkOIz4j2I",
-  authDomain: "ms-office-app.firebaseapp.com",
-  projectId: "ms-office-app",
-  storageBucket: "ms-office-app.firebasestorage.app",
-  messagingSenderId: "819697343763",
-  appId: "1:819697343763:web:5fe07875c5281cc1f20ee6",
-  measurementId: "G-EKJ8E1LT3C"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-window.register = async function () {
-
-let email = document.getElementById("email").value;
-let password = document.getElementById("password").value;
-
-try{
-
-await createUserWithEmailAndPassword(auth,email,password);
-
-alert("Account Created Successfully ✅");
-
-}catch(error){
-
-alert(error.message);
-
+<script>
+function showRegister(){
+document.getElementById("registerBox").style.display="block";
 }
 
+function registerUser(){
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
+
+if(email==="" || password===""){
+alert("Please fill all fields");
+return;
 }
 
-window.login = async function () {
+localStorage.setItem("email",email);
+localStorage.setItem("password",password);
 
-let email = document.getElementById("email").value;
-let password = document.getElementById("password").value;
+alert("Registration Successful");
 
-try{
-
-await signInWithEmailAndPassword(auth,email,password);
-
-alert("Login Success ✅");
-
-}catch(error){
-
-alert(error.message);
-
+showDashboard();
 }
 
+function loginUser(){
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
+
+let savedEmail=localStorage.getItem("email");
+let savedPassword=localStorage.getItem("password");
+
+if(email===savedEmail && password===savedPassword){
+alert("Login Successful");
+showDashboard();
+}else{
+alert("Wrong Email or Password");
+}
 }
 
-window.logout = async function(){
-
-await signOut(auth);
-
-alert("Logout Success");
-
+function showDashboard(){
+document.getElementById("dashboard").style.display="block";
+document.getElementById("registerBox").style.display="none";
 }
-function openPage(){
 
-window.location.href = "#register";
+function openMenu(){
+let menu=document.getElementById("menuBox");
 
-window.showRegister = function(){
+if(menu.style.display==="block"){
+menu.style.display="none";
+}else{
+menu.style.display="block";
+}
+}
 
-document.getElementById("registerBox").style.display = "block";
-
+function logoutUser(){
+alert("Logged Out");
+location.reload();
 }
 </script>
+
 </body>
 </html>
