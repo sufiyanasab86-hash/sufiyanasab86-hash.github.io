@@ -1,0 +1,268 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: radial-gradient(circle at center, #1a0033 0%, #000000 70%);
+    overflow: hidden;
+    height: 100vh;
+    color: #00ff00;
+    image-rendering: pixelated;
+}
+
+.game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameCanvas {
+    border: 3px solid #00ff00;
+    box-shadow: 0 0 30px #00ff00;
+    background: #000;
+    max-width: 100%;
+    max-height: 100%;
+    image-rendering: pixelated;
+}
+
+/* UI Overlay */
+.ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.top-ui {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.health-bar {
+    width: 200px;
+    height: 20px;
+    background: #330000;
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.health {
+    height: 100%;
+    background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00);
+    width: 100%;
+    transition: width 0.3s ease;
+}
+
+.score, .coins {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 15px;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.crosshair {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border: 2px solid #ff0000;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #ff0000;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* Game Over Screen */
+.game-over-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.game-over-screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.game-over-content {
+    text-align: center;
+    background: rgba(20, 0, 40, 0.9);
+    padding: 40px;
+    border: 3px solid #ff0000;
+    border-radius: 15px;
+    box-shadow: 0 0 50px #ff0000;
+}
+
+.game-over-content h1 {
+    font-size: 48px;
+    color: #ff0000;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px #ff0000;
+}
+
+.game-over-content p {
+    font-size: 24px;
+    margin: 15px 0;
+    color: #00ff00;
+}
+
+.restart-btn {
+    background: linear-gradient(45deg, #ff0000, #cc0000);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 24px;
+    font-family: inherit;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 0 20px #ff0000;
+    transition: all 0.3s ease;
+}
+
+.restart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #ff0000;
+}
+
+/* Mobile Controls */
+.mobile-controls {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    right: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    pointer-events: auto;
+    z-index: 15;
+}
+
+.joystick {
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 255, 0, 0.2);
+    border: 3px solid #00ff00;
+    border-radius: 50%;
+    position: relative;
+    touch-action: none;
+}
+
+.joystick-knob {
+    width: 40px;
+    height: 40px;
+    background: #00ff00;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px #00ff00;
+    transition: all 0.1s ease;
+}
+
+.shoot-btn {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(45deg, #ff0000, #cc0000);
+    border: 4px solid #ff6666;
+    border-radius: 50%;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 0 30px #ff0000;
+    transition: all 0.2s ease;
+}
+
+.shoot-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 40px #ff0000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .top-ui {
+        flex-direction: column;
+        gap: 10px;
+        top: 10px;
+    }
+    
+    .health-bar {
+        width: 150px;
+    }
+    
+    .score, .coins {
+        font-size: 16px;
+    }
+    
+    .mobile-controls {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+    }
+    
+    .joystick {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .joystick-knob {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .shoot-btn {
+        width: 100px;
+        height: 100px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-over-content {
+        padding: 20px;
+        margin: 20px;
+    }
+    
+    .game-over-content h1 {
+        font-size: 36px;
+    }
+}
