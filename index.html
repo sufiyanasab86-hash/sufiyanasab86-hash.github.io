@@ -1,229 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MS Office</title>
+Create a complete GitHub-ready zombie survival game project called “Dead City Survival”.
 
-<style>
-body{
-margin:0;
-padding:0;
-font-family:Arial;
-background:#f3f4f6;
-}
+Requirements:
+- Build the full game using HTML, CSS and JavaScript
+- The project must run directly on GitHub Pages without any backend
+- Create all required files automatically:
+  - index.html
+  - style.css
+  - script.js
+  - assets folder
+  - README.md
+- Make the game fully mobile responsive for Android devices
+- Add touch controls for mobile gameplay
 
-header{
-background:white;
-padding:15px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
+Game Features:
+- Zombie survival gameplay
+- Player movement using touch joystick/buttons
+- Shooting system with bullets and reload
+- Multiple zombies attacking player
+- Health bar system
+- Coin collection and score system
+- Survival wave levels
+- Boss zombie every few rounds
+- Game over and restart system
+- Main menu with Play button
+- Pause menu
+- Settings menu
+- Weapon upgrade system
+- Save progress using localStorage
+- Background music and sound effects
+- Smooth animations and premium UI
 
-.logo{
-display:flex;
-align-items:center;
-gap:10px;
-}
+Graphics & Design:
+- Dark horror atmosphere
+- Burning city background
+- Realistic zombie effects
+- Blood splash effects
+- Mobile game style interface
+- Premium futuristic UI
 
-.logo-box{
-width:45px;
-height:45px;
-background:#165DFF;
-color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:24px;
-font-weight:bold;
-border-radius:10px;
-}
+GitHub Requirements:
+- Optimize everything for GitHub Pages hosting
+- Use only frontend technologies
+- No server needed
+- Add clean folder structure
+- Include instructions in README for uploading to GitHub
 
-.menu{
-font-size:30px;
-cursor:pointer;
-}
-
-.hero{
-padding:30px;
-}
-
-.hero h1{
-font-size:50px;
-line-height:1.1;
-margin-bottom:10px;
-}
-
-.hero p{
-font-size:22px;
-color:#555;
-}
-
-.btn{
-background:#165DFF;
-color:white;
-border:none;
-padding:18px 45px;
-font-size:24px;
-border-radius:15px;
-margin-top:20px;
-cursor:pointer;
-}
-
-#registerBox,
-#dashboard,
-#menuBox{
-display:none;
-background:white;
-padding:20px;
-margin:20px;
-border-radius:20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
-}
-
-input{
-width:100%;
-padding:15px;
-font-size:18px;
-border:1px solid #ccc;
-border-radius:10px;
-margin-top:10px;
-}
-
-.job-card{
-background:#f3f4f6;
-padding:20px;
-border-radius:15px;
-margin-top:15px;
-}
-
-.menu-item{
-padding:15px;
-border-bottom:1px solid #ddd;
-font-size:20px;
-}
-</style>
-</head>
-<body>
-
-<header>
-<div class="logo">
-<div class="logo-box">M</div>
-<h2>MS Office</h2>
-</div>
-
-<div class="menu" onclick="openMenu()">☰</div>
-</header>
-
-<div class="hero">
-<h1>👋 Welcome to MS Office Website</h1>
-<p>Find workers and jobs easily.</p>
-
-<button class="btn" onclick="showRegister()">
-Start
-</button>
-</div>
-
-<div id="registerBox">
-<h2>Create Account</h2>
-
-<input type="email" id="email" placeholder="Enter Email">
-
-<input type="password" id="password" placeholder="Enter Password">
-
-<button class="btn" onclick="registerUser()">
-Register
-</button>
-
-<button class="btn" onclick="loginUser()">
-Login
-</button>
-</div>
-
-<div id="dashboard">
-<h2>Available Work</h2>
-
-<div class="job-card">
-<h3>Office Worker Needed</h3>
-<p>Salary: ₹15,000</p>
-</div>
-
-<div class="job-card">
-<h3>Computer Operator</h3>
-<p>Salary: ₹12,000</p>
-</div>
-
-<div class="job-card">
-<h3>Data Entry Job</h3>
-<p>Salary: ₹10,000</p>
-</div>
-</div>
-
-<div id="menuBox">
-<div class="menu-item">👤 Profile</div>
-<div class="menu-item">⚙ Website Settings</div>
-<div class="menu-item" onclick="logoutUser()">🚪 Logout</div>
-</div>
-
-<script>
-function showRegister(){
-document.getElementById("registerBox").style.display="block";
-}
-
-function registerUser(){
-let email=document.getElementById("email").value;
-let password=document.getElementById("password").value;
-
-if(email==="" || password===""){
-alert("Please fill all fields");
-return;
-}
-
-localStorage.setItem("email",email);
-localStorage.setItem("password",password);
-
-alert("Registration Successful");
-
-showDashboard();
-}
-
-function loginUser(){
-let email=document.getElementById("email").value;
-let password=document.getElementById("password").value;
-
-let savedEmail=localStorage.getItem("email");
-let savedPassword=localStorage.getItem("password");
-
-if(email===savedEmail && password===savedPassword){
-alert("Login Successful");
-showDashboard();
-}else{
-alert("Wrong Email or Password");
-}
-}
-
-function showDashboard(){
-document.getElementById("dashboard").style.display="block";
-document.getElementById("registerBox").style.display="none";
-}
-
-function openMenu(){
-let menu=document.getElementById("menuBox");
-
-if(menu.style.display==="block"){
-menu.style.display="none";
-}else{
-menu.style.display="block";
-}
-}
-
-function logoutUser(){
-alert("Logged Out");
-location.reload();
-}
-</script>
-
-</body>
-</html>
+Important:
+- Everything must work after uploading to GitHub Pages
+- No broken buttons
+- No placeholder sections
+- Fully playable game
+- Smooth performance on mobile browsers
