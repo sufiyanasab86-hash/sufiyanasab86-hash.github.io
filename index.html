@@ -1,53 +1,48 @@
-Create a complete GitHub-ready zombie survival game project called “Dead City Survival”.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MS Word Zombie Survival</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Game Canvas -->
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- UI Overlay -->
+        <div class="ui-overlay">
+            <div class="top-ui">
+                <div class="health-bar">
+                    <div class="health" id="healthBar"></div>
+                </div>
+                <div class="score">Score: <span id="score">0</span></div>
+                <div class="coins">Coins: <span id="coins">0</span></div>
+            </div>
+            
+            <div class="crosshair"></div>
+        </div>
+        
+        <!-- Game Over Screen -->
+        <div class="game-over-screen" id="gameOverScreen">
+            <div class="game-over-content">
+                <h1>Game Over</h1>
+                <p>Final Score: <span id="finalScore">0</span></p>
+                <p>Coins Earned: <span id="finalCoins">0</span></p>
+                <button id="restartBtn" class="restart-btn">Restart</button>
+            </div>
+        </div>
+        
+        <!-- Mobile Controls -->
+        <div class="mobile-controls">
+            <div class="joystick" id="joystick">
+                <div class="joystick-knob"></div>
+            </div>
+            <button class="shoot-btn" id="shootBtn">SHOOT</button>
+        </div>
+    </div>
 
-Requirements:
-- Build the full game using HTML, CSS and JavaScript
-- The project must run directly on GitHub Pages without any backend
-- Create all required files automatically:
-  - index.html
-  - style.css
-  - script.js
-  - assets folder
-  - README.md
-- Make the game fully mobile responsive for Android devices
-- Add touch controls for mobile gameplay
-
-Game Features:
-- Zombie survival gameplay
-- Player movement using touch joystick/buttons
-- Shooting system with bullets and reload
-- Multiple zombies attacking player
-- Health bar system
-- Coin collection and score system
-- Survival wave levels
-- Boss zombie every few rounds
-- Game over and restart system
-- Main menu with Play button
-- Pause menu
-- Settings menu
-- Weapon upgrade system
-- Save progress using localStorage
-- Background music and sound effects
-- Smooth animations and premium UI
-
-Graphics & Design:
-- Dark horror atmosphere
-- Burning city background
-- Realistic zombie effects
-- Blood splash effects
-- Mobile game style interface
-- Premium futuristic UI
-
-GitHub Requirements:
-- Optimize everything for GitHub Pages hosting
-- Use only frontend technologies
-- No server needed
-- Add clean folder structure
-- Include instructions in README for uploading to GitHub
-
-Important:
-- Everything must work after uploading to GitHub Pages
-- No broken buttons
-- No placeholder sections
-- Fully playable game
-- Smooth performance on mobile browsers
+    <script src="script.js"></script>
+</body>
+</html>
