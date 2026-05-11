@@ -3,43 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MS Word Zombie Survival</title>
+    <title>NeoAuth - Futuristic Login</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="game-container">
-        <!-- Game Canvas -->
-        <canvas id="gameCanvas"></canvas>
-        
-        <!-- UI Overlay -->
-        <div class="ui-overlay">
-            <div class="top-ui">
-                <div class="health-bar">
-                    <div class="health" id="healthBar"></div>
-                </div>
-                <div class="score">Score: <span id="score">0</span></div>
-                <div class="coins">Coins: <span id="coins">0</span></div>
+    <div class="container">
+        <div class="glass-card">
+            <div class="logo">
+                <div class="neon-glow">NEO</div>
+                <div class="auth-text">AUTH</div>
             </div>
             
-            <div class="crosshair"></div>
-        </div>
-        
-        <!-- Game Over Screen -->
-        <div class="game-over-screen" id="gameOverScreen">
-            <div class="game-over-content">
-                <h1>Game Over</h1>
-                <p>Final Score: <span id="finalScore">0</span></p>
-                <p>Coins Earned: <span id="finalCoins">0</span></p>
-                <button id="restartBtn" class="restart-btn">Restart</button>
+            <div class="form-container">
+                <div class="form-tabs">
+                    <button class="tab-btn active" data-tab="login">Login</button>
+                    <button class="tab-btn" data-tab="register">Register</button>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form active">
+                    <div class="input-group">
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                        <label for="loginEmail">Email</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        <label for="loginPassword">Password</label>
+                    </div>
+                    <button type="submit" class="neon-btn login-btn">
+                        <span>Login</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </form>
+
+                <!-- Register Form -->
+                <form id="registerForm" class="auth-form">
+                    <div class="input-group">
+                        <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                        <label for="registerEmail">Email</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="registerPassword" placeholder="Enter your password" required minlength="6">
+                        <label for="registerPassword">Password (min 6 chars)</label>
+                    </div>
+                    <button type="submit" class="neon-btn register-btn">
+                        <span>Create Account</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </form>
             </div>
+
+            <div id="message" class="message"></div>
         </div>
-        
-        <!-- Mobile Controls -->
-        <div class="mobile-controls">
-            <div class="joystick" id="joystick">
-                <div class="joystick-knob"></div>
+
+        <div class="floating-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+
+    <!-- Dashboard Page (Hidden) -->
+    <div id="dashboard" class="dashboard hidden">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h1>Welcome to Dashboard</h1>
+                <button id="logoutBtn" class="neon-btn logout-btn">Logout</button>
             </div>
-            <button class="shoot-btn" id="shootBtn">SHOOT</button>
+            <div class="dashboard-content">
+                <div class="stats-card">
+                    <h3>Status</h3>
+                    <p>✅ Logged in successfully!</p>
+                </div>
+                <div class="user-info">
+                    <h3>User Info</h3>
+                    <p id="userEmail"></p>
+                </div>
+            </div>
         </div>
     </div>
 
