@@ -1,91 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeoAuth - Futuristic Login</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MS Car Racing</title>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+background:#111;
+font-family:Arial;
+}
+
+#gameArea{
+width:100%;
+height:100vh;
+background:#333;
+position:relative;
+overflow:hidden;
+}
+
+.road{
+width:300px;
+height:100vh;
+background:#555;
+margin:auto;
+position:relative;
+overflow:hidden;
+border-left:5px solid white;
+border-right:5px solid white;
+}
+
+.line{
+width:10px;
+height:100px;
+background:white;
+position:absolute;
+left:145px;
+}
+
+#car{
+width:60px;
+height:100px;
+background:red;
+position:absolute;
+bottom:20px;
+left:120px;
+border-radius:10px;
+}
+
+.enemy{
+width:60px;
+height:100px;
+background:yellow;
+position:absolute;
+top:-120px;
+border-radius:10px;
+}
+
+#score{
+position:absolute;
+top:10px;
+left:10px;
+color:white;
+font-size:24px;
+z-index:100;
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="glass-card">
-            <div class="logo">
-                <div class="neon-glow">NEO</div>
-                <div class="auth-text">AUTH</div>
-            </div>
-            
-            <div class="form-container">
-                <div class="form-tabs">
-                    <button class="tab-btn active" data-tab="login">Login</button>
-                    <button class="tab-btn" data-tab="register">Register</button>
-                </div>
 
-                <!-- Login Form -->
-                <form id="loginForm" class="auth-form active">
-                    <div class="input-group">
-                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
-                        <label for="loginEmail">Email</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
-                        <label for="loginPassword">Password</label>
-                    </div>
-                    <button type="submit" class="neon-btn login-btn">
-                        <span>Login</span>
-                        <div class="btn-glow"></div>
-                    </button>
-                </form>
+<div id="score">Score: 0</div>
 
-                <!-- Register Form -->
-                <form id="registerForm" class="auth-form">
-                    <div class="input-group">
-                        <input type="email" id="registerEmail" placeholder="Enter your email" required>
-                        <label for="registerEmail">Email</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="password" id="registerPassword" placeholder="Enter your password" required minlength="6">
-                        <label for="registerPassword">Password (min 6 chars)</label>
-                    </div>
-                    <button type="submit" class="neon-btn register-btn">
-                        <span>Create Account</span>
-                        <div class="btn-glow"></div>
-                    </button>
-                </form>
-            </div>
+<div id="gameArea">
+<div class="road" id="road">
 
-            <div id="message" class="message"></div>
-        </div>
+<div class="line" style="top:0px;"></div>
+<div class="line" style="top:150px;"></div>
+<div class="line" style="top:300px;"></div>
+<div class="line" style="top:450px;"></div>
+<div class="line" style="top:600px;"></div>
 
-        <div class="floating-particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
-    </div>
+<div id="car"></div>
 
-    <!-- Dashboard Page (Hidden) -->
-    <div id="dashboard" class="dashboard hidden">
-        <div class="dashboard-container">
-            <div class="dashboard-header">
-                <h1>Welcome to Dashboard</h1>
-                <button id="logoutBtn" class="neon-btn logout-btn">Logout</button>
-            </div>
-            <div class="dashboard-content">
-                <div class="stats-card">
-                    <h3>Status</h3>
-                    <p>✅ Logged in successfully!</p>
-                </div>
-                <div class="user-info">
-                    <h3>User Info</h3>
-                    <p id="userEmail"></p>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="enemy" id="enemy"></div>
 
-    <script src="script.js"></script>
+</div>
+</div>
+
+<script>
+
+const car = document.getElementById("car");
+const enemy = document.getElementById("enemy");
+const scoreText = document.getElementById("score");
+
+let carLeft = 120;
+let enemyTop = -120;
+let enemyLeft = Math.floor(Math.random()*240);
+
+let score = 0;
+
+enemy.style.left = enemyLeft + "px";
+
+document.addEventListener("keydown",(e)=>{
+
+if(e.key==="ArrowLeft" && carLeft > 0){
+carLeft -= 20;
+}
+
+if(e.key==="ArrowRight" && carLeft < 240){
+carLeft += 20;
+}
+
+car.style.left = carLeft + "px";
+
+});
+
+function game(){
+
+enemyTop += 5;
+
+if(enemyTop > 700){
+enemyTop = -120;
+enemyLeft = Math.floor(Math.random()*240);
+enemy.style.left = enemyLeft + "px";
+
+score++;
+scoreText.innerHTML = "Score: " + score;
+}
+
+enemy.style.top = enemyTop + "px";
+
+let carRect = car.getBoundingClientRect();
+let enemyRect = enemy.getBoundingClientRect();
+
+if(
+carRect.left < enemyRect.right &&
+carRect.right > enemyRect.left &&
+carRect.top < enemyRect.bottom &&
+carRect.bottom > enemyRect.top
+){
+alert("Game Over! Score: " + score);
+location.reload();
+}
+
+requestAnimationFrame(game);
+
+}
+
+game();
+
+</script>
+
 </body>
 </html>
